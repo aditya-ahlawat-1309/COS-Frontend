@@ -1,0 +1,47 @@
+.taskbarMain {
+    position: absolute;
+    bottom: 0;
+background: rgba(255, 255, 255, 0.5);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 1);
+min-height: 10vh;
+min-width: 5vw;
+left:50%;
+transform: translate(-50%, 0%);
+}
+
+.logoButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.taskBarLogo {
+    max-width: 9vmin;
+padding:0.5rem;
+border-radius: 15px;
+}
+
+.logoLink {
+    text-decoration: none;
+}
+
+.centralRepoDialogMain {
+
+     position: absolute;
+    top: 0;
+    left:0;
+background: rgba(255, 255, 255, 1);
+border-radius: 16px;
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgb(0, 0, 0);
+min-height: 85vh;
+min-width: 100vw;
+color:black;
+z-index: 2;
+font-size: large;
+}

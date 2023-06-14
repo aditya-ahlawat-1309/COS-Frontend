@@ -1,0 +1,11 @@
+.folderMain {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.folderLogoButton {
+  border: none;
+  background-color: transparent;
+  float: left;
+}

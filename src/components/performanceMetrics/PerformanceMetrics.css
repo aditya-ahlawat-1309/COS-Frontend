@@ -1,0 +1,45 @@
+.performance-metrics {
+    /* position: absolute;
+    left: 1%;
+    top: 10%; */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  border-radius: 10px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.tile-cpu {
+  background-color: red;
+}
+
+.tile-memory {
+  background-color: blue;
+}
+
+.tile-network {
+  background-color: green;
+}
+
+.tile-uptime {
+  background-color: yellow;
+  color:black;
+}
+
+.tile-battery {
+  background-color: #9238f2;
+}
+
+.tile-battery-status {
+  background-color: #ffffff;
+  color:black;
+}

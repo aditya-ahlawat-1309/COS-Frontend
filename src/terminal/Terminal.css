@@ -1,0 +1,54 @@
+/* .terminal-main{
+     display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+} */
+
+.terminal-main{
+  position: absolute;
+  top:0%;
+  /* width:100%;
+  height:20%; */
+}
+
+/* Terminal container */
+.terminal-container {
+  width: 100vw;
+  height: 80vh;
+  background-color: black;
+  color: #00FF00;
+  font-family: monospace;
+  padding: 10px;
+  overflow-y: auto;
+  float: left;
+}
+
+/* Terminal prompt */
+.terminal-prompt {
+  color: #00FF00;
+}
+
+/* Terminal input */
+.terminal-input {
+  color: #FFFFFF;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+/* Terminal output */
+.terminal-output {
+  margin-bottom: 5px;
+}
+
+/* Terminal command */
+.terminal-command {
+  color: #00FFFF;
+}
+
+/* Terminal error */
+.terminal-error {
+  color: #FF0000;
+}
