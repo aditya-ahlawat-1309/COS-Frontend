@@ -146,28 +146,27 @@ import "./FolderDialog.css";
 import { ChatContext } from "../../Context/ChatProvider";
 import axios from "axios";
 
-function FolderDialog({ folderId, handleCloseDialog, name  }) {
+function FolderDialog({ handleCloseDialog, folderId, name }) {
   const { user } = useContext(ChatContext);
   const [texts, setTexts] = useState([]);
   const [newText, setNewText] = useState("");
 
   console.log(folderId);
   useEffect(() => {
-      getTexts();
+    getTexts();
   }, [user]);
 
   const getTexts = async () => {
     try {
-
-       const config = {
-           id: folderId,
-          };
-       console.log(config)
-//       const config = {
-//         id:folderId,
-//           Authorization: `Bearer ${user.token}:${user.username}`,
-//       };
-// console.log(config)
+      const config = {
+        id: folderId,
+      };
+      console.log(config);
+      //       const config = {
+      //         id:folderId,
+      //           Authorization: `Bearer ${user.token}:${user.username}`,
+      //       };
+      // console.log(config)
       const response = await axios.post(
         `http://localhost:8000/api/get/files/text`,
         config
@@ -182,7 +181,7 @@ function FolderDialog({ folderId, handleCloseDialog, name  }) {
     try {
       const config = {
         parentFolderId: folderId,
-        text: newText ,
+        text: newText,
       };
 
       const response = await axios.post(
@@ -198,16 +197,27 @@ function FolderDialog({ folderId, handleCloseDialog, name  }) {
 
   return (
     <div className="folderDialogMain">
-      <h2> {name}.txt</h2>
-      <button className="closeButton" onClick={handleCloseDialog}>
-        X
-      </button>
-
-      <ul>
+      <h2 style={{ color: "white" }}> {name}.txt</h2>
+      <ul style={{ color: "white" }}>
         {texts.map((text) => (
           <li key={text._id}>{text.text}</li>
         ))}
       </ul>
+      <textarea
+        type="text"
+        style={{ width: "100%", height: "25vh", fontSize:"large", border:"none" }}
+        value={newText}
+        onChange={(e) => setNewText(e.target.value)}
+        placeholder="Enter text here ..."
+      />
+
+      <br />
+      <button className="addTextButton" onClick={handleAddText}>
+        Add Text
+      </button>
+      <button className="subFunctionsButton" onClick={handleCloseDialog}>
+        BACK
+      </button>
 
       {/* <textarea
         style={{ width: "95%", height: "45vh", borderRadius: "15px" }}
@@ -215,14 +225,6 @@ function FolderDialog({ folderId, handleCloseDialog, name  }) {
         value={text}
         onChange={handleChange}
       /> */}
-      <textarea
-        type="text"
-        style={{ width: "90%", height: "20vh" }}
-        value={newText}
-        onChange={(e) => setNewText(e.target.value)}
-      />
-      <br/>
-      <button style={{border:"1px solid green",background:"transparent",color:"green",borderRadius:"15px"}} onClick={handleAddText}>Add Text</button>
     </div>
   );
 }

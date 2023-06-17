@@ -13,8 +13,10 @@ const BackgroundChanger = ({ handleOptionChange, handleCloseDialog }) => {
 
   return (
     <div className="backgroundChangerDialogMain">
-      <button className="closeButton" onClick={handleCloseDialog}>X</button>
-      <br/>
+      <button className="subFunctionsButton " onClick={handleCloseDialog}>
+        CLOSE
+      </button>
+      <br />
       <button
         className="backgroundChangerButton"
         onClick={() => handleButtonClick("App-header-option1")}

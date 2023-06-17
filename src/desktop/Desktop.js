@@ -20,8 +20,8 @@ const Desktop = () => {
         <Menubar handleOptionChange={handleOptionChange} />
         {/* Rest of the code */}
         <Folder />
-        <Clock />
-        <Weather />
+        {/* <Clock />
+        <Weather /> */}
         <Taskbar />
       </header>
     </div>

@@ -1,19 +1,21 @@
 .folderDialogMain {
 
        position: absolute;
-    top: 0%;
-    left:0%;
+    top: 0;
+    left:0;
     align-items: center;
-background: rgba(255, 255, 255, 1);
+background: rgba(0, 0, 0, 1);
 border-radius: 16px;
 backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
 border: 1px solid rgb(0, 0, 0);
-height: 87.5vh;
+height: 86.5vh;
 width: 100vw;
 color:black;
 z-index: 2;
 font-size: large;
+overflow-y: hidden;
+overflow-x: hidden;
 }
 
 .closeButtonDialog {
@@ -25,4 +27,19 @@ font-size: large;
     font-size: x-large;
     font-weight: bolder;
     margin-top: -10px;
+}
+
+.addTextButton{
+     position: absolute;
+  bottom: 3%;
+  right:12.5%;
+  float: right;
+   border: none;
+  background-color: green;
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1);
+  color:white;
+  width: 150px;
+  height: 50px;
+  font-size: medium;
+  border-radius: 15px;
 }

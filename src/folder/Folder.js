@@ -109,9 +109,31 @@ const DraggableBox = ({ id, name }) => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleOpenDialog = () => {
+ 
+  const handleOpenClick = () => {
     setIsOpen(!isOpen);
   };
+
+const handleDeleteIcon = async () => {
+   try {
+        const response = await axios.post(
+          `http://localhost:8000/api/post/delete/${id}`
+        ).then(() => {
+          window.location.reload();
+        });
+          
+        // You can perform additional actions after deleting the icon
+      } catch (error) {
+        console.error("Error:", error);
+      }
+}
+
+        const [removeDialog, setRemoveDialog] = useState(false);
+
+          const handleFileClick = () => {
+            //
+            setRemoveDialog(!removeDialog);
+          };
 
   return (
     <>
@@ -126,14 +148,30 @@ const DraggableBox = ({ id, name }) => {
         onContextMenu={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        onClick={handleOpenDialog}
+        onClick={handleFileClick}
       >
-        <img src={notepad} width="50%" alt="Folder" />
+        <img src={notepad} width="40%" alt="Folder" />
         <br />
         <label className="folderLabel">File {name}.txt</label>
       </button>
+
+      {removeDialog && (
+        <div className="folderOpenAndDeleteButtons">
+          <button className="openButtonClick" onClick={handleOpenClick}>
+            OPEN
+          </button>
+          <button className="deleteButtonClick" onClick={handleDeleteIcon}>
+            DELETE
+          </button>
+        </div>
+      )}
+
       {isOpen && (
-        <FolderDialog handleCloseDialog={handleOpenDialog} folderId={id} folderName={name}/>
+        <FolderDialog
+          handleCloseDialog={handleOpenClick}
+          folderId={id}
+          name={name}
+        />
       )}
     </>
   );
@@ -332,6 +370,8 @@ const [isOpen, setIsOpen] = useState(false);
      const [fileName, setFileName] = useState("");
      const [files, setFiles] = useState([]);
 
+      const [removeDialog, setRemoveDialog] = useState(false);
+
     const handleFolderNameChange = (event) => {
       setFolderName(event.target.value);
     };
@@ -341,8 +381,15 @@ const [isOpen, setIsOpen] = useState(false);
       setFileName(event.target.value);
     };
   const handleFolderClick = () => {
-    setDialogOpen(true);
+    // 
+     setRemoveDialog(!removeDialog);
   };
+
+  const handleOpenClick = () => {
+      setDialogOpen(true);
+  }
+
+
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
@@ -510,6 +557,22 @@ const [isOpen, setIsOpen] = useState(false);
       fetchSubfiles();
     }, []);
 
+
+
+    const handleDeleteIcon = async () => {
+      try {
+        const response = await axios.post(
+          `http://localhost:8000/api/post/delete/${folder._id}`
+        ).then(() => {
+          window.location.reload();
+        });
+          
+        // You can perform additional actions after deleting the icon
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
   return (
     <>
       <div>
@@ -527,34 +590,55 @@ const [isOpen, setIsOpen] = useState(false);
           onClick={handleOpenDialog}
         >
           <div onClick={handleFolderClick}>
-            <img src={folderLogo} width="50%" alt="Folder" />
+            <img src={folderLogo} width="40%" alt="Folder" />
             <br />
             {/* <label className="folderLabel">File {name}.txt</label> */}
             <span>{folder.name}</span>
           </div>
         </button>
 
+        {removeDialog && (
+          <div className="folderOpenAndDeleteButtons">
+            <button className="openButtonClick" onClick={handleOpenClick}>
+              OPEN
+            </button>
+            <button className="deleteButtonClick" onClick={handleDeleteIcon}>
+              DELETE
+            </button>
+          </div>
+        )}
+
         {dialogOpen && (
           <div className="folderDialogMain">
-            <div style={{ display: "flex" }}>
+            <br />
+            <br />
+            <div className="createSubFunctions">
               <input
                 type="text"
-                placeholder="Folder Name"
+                placeholder=" Enter Folder Name"
                 value={folderName}
                 onChange={handleFolderNameChange}
+                className="createInput"
               />
-              <button onClick={handleCreateFolder}>Create Folder</button>
-            </div>
-            <div style={{ display: "flex" }}>
+              &nbsp;&nbsp;&nbsp;
+              <button className="createButton" onClick={handleCreateFolder}>
+                NEW FOLDER
+              </button>
+              <br />
+              <br />
               <input
                 type="text"
-                placeholder="File Name"
+                placeholder=" Enter File Name"
                 value={fileName}
                 onChange={handleFileNameChange}
+                className="createInput"
               />
+              &nbsp;&nbsp;&nbsp;
+              <button className="createButton" onClick={handleCreateFile}>
+                NEW FILE
+              </button>
             </div>
-            <button onClick={handleCreateFile}>Create File</button>
-            <h2>Subfolders:</h2>
+            <br />
             {subfolders.map((subfolder) => (
               <Folder key={subfolder._id} folder={subfolder} />
             ))}
@@ -568,7 +652,9 @@ const [isOpen, setIsOpen] = useState(false);
                 />
               ))}
             </div>
-            <button onClick={handleCloseDialog}>Close</button>
+            <button className="subFunctionsButton" onClick={handleCloseDialog}>
+              BACK
+            </button>
           </div>
         )}
       </div>
@@ -576,89 +662,55 @@ const [isOpen, setIsOpen] = useState(false);
   );
 };
 
-const CreateParentFolder = () => {
-  const [folderName, setFolderName] = useState("");
-  const [parentFolder, setParentFolder] = useState(null);
-  const [folders, setFolders] = useState([]);
 
-
-    const [fileName, setFileName] = useState("");
-    const [files, setFiles] = useState([]);
-
-  const handleFolderNameChange = (event) => {
-    setFolderName(event.target.value);
-  };
-
-    const handleFileNameChange = (event) => {
-      setFileName(event.target.value);
-    };
-    const user = JSON.parse(localStorage.getItem("userInfo"));
-
-  const handleCreateFolder = async () => {
+  const fetchSubfiles = async (user, setFiles) => {
     try {
-         const config = {
-           headers: {
-             Authorization:
-               `Bearer ${user.token}:${user.username}`,
-             name: folderName,
-             parentFolderId: user._id,
-           },
-         };
-      const response = await axios.post("http://localhost:8000/api/post/folders",config);
-      console.log("Parent folder created:", response.data);
-      // Reset the folder name input
-      setFolderName("");
-
-      fetchSubfolders();
+      const config = {
+        headers: {
+          id: user._id,
+        },
+      };
+      const response = await axios.post(
+        "http://localhost:8000/api/get/subFolders",
+        config
+      );
+      console.log(response.data);
+      setFiles(response.data.files);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
-   const handleCreateFile = async () => {
-     try {
-       const config = {
-         headers: {
-           Authorization: `Bearer ${user.token}:${user.username}`,
-           name: fileName,
-           parentFolderId: user._id,
-         },
-       };
-       const response = await axios.post(
-         "http://localhost:8000/api/post/files",
-         config
-       );
-       console.log("Parent folder created:", response.data);
-       // Reset the folder name input
-       setFileName("");
+  const fetchSubfolders = async (user, setFolders) => {
+    try {
+      const config = {
+        headers: {
+          id: user._id,
+        },
+      };
+      const response = await axios.post(
+        "http://localhost:8000/api/get/subFolders",
+        config
+      );
+      console.log("called");
+      setFolders(response.data.subfolders);
+      window.location.reload()
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
-       fetchSubfiles();
-     } catch (error) {
-       console.error("Error:", error);
-     }
-   };
+  export { fetchSubfolders };
+  export { fetchSubfiles };
 
-   const fetchSubfolders = async () => {
-     try {
-       const config = {
-         headers: {
-           id: user._id,
-         },
-       };
-       const response = await axios.post(
-         "http://localhost:8000/api/get/subFolders",
-         config
-       );
-       console.log(response.data);
-       setFolders(response.data.subfolders);
-     } catch (error) {
-       console.error("Error:", error);
-     }
-   };
+const CreateParentFolder = () => {
+  const [folderName, setFolderName] = useState("");
+  const [parentFolder, setParentFolder] = useState(null);
+  const [folders, setFolders] = useState([]);
+    const [fileName, setFileName] = useState("");
+    const [files, setFiles] = useState([]);
 
-console.log(user)
-  useEffect(() => {
-    const fetchSubfolders = async () => {
+    const fetchSubfiles = async (user, setFiles) => {
       try {
         const config = {
           headers: {
@@ -669,90 +721,51 @@ console.log(user)
           "http://localhost:8000/api/get/subFolders",
           config
         );
-        console.log(response.data)
+        console.log(response.data);
+        setFiles(response.data.files);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    const fetchSubfolders = async (user, setFolders) => {
+      try {
+        const config = {
+          headers: {
+            id: user._id,
+          },
+        };
+        const response = await axios.post(
+          "http://localhost:8000/api/get/subFolders",
+          config
+        );
+        console.log("called");
         setFolders(response.data.subfolders);
       } catch (error) {
         console.error("Error:", error);
       }
     };
-    fetchSubfolders();
-  }, []);
 
-
-   const fetchSubfiles = async () => {
-     try {
-       const config = {
-         headers: {
-           id: user._id,
-         },
-       };
-       const response = await axios.post(
-         "http://localhost:8000/api/get/subFolders",
-         config
-       );
-       console.log(response.data);
-       setFiles(response.data.files);
-     } catch (error) {
-       console.error("Error:", error);
-     }
-   };
-
-   console.log(user);
-   useEffect(() => {
-     const fetchSubfiles = async () => {
-       try {
-         const config = {
-           headers: {
-             id: user._id,
-           },
-         };
-         const response = await axios.post(
-           "http://localhost:8000/api/get/subFolders",
-           config
-         );
-         console.log(response.data);
-         setFiles(response.data.files);
-       } catch (error) {
-         console.error("Error:", error);
-       }
-     };
-     fetchSubfiles();
-   }, []);
-
-    useEffect(() => {
-      getFolders(user, setFolders);
-    }, []);
-
+    fetchSubfiles()
+    fetchSubfolders()
+  
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+    fetchSubfolders(user, setFolders);
+     fetchSubfiles(user, setFiles);
+  },[]);
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Folder Name"
-        value={folderName}
-        onChange={handleFolderNameChange}
-      />
-      <button onClick={handleCreateFolder}>Create Folder</button>
       <br />
       <br />
-      <input
-        type="text"
-        placeholder="File Name"
-        value={fileName}
-        onChange={handleFileNameChange}
-      />
-      <button onClick={handleCreateFile}>Create File</button>
-
-      <br />
-      <br />
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         {folders.map((folder) => (
           <Folder key={folder._id} folder={folder} />
         ))}
       </div>
 
-      <br/>
-      <br/>
-      <div style={{ display: "flex" }}>
+      <br />
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         {files.map((folder) => (
           <DraggableBox
             key={folder._id}
@@ -765,5 +778,8 @@ console.log(user)
     </div>
   );
 };
+
+
+
 
 export default CreateParentFolder;

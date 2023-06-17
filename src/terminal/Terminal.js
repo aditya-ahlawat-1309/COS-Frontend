@@ -55,8 +55,8 @@ console.log("Start");
   return (
     <div className="terminal-main">
       <div className="terminal-container">
-        <button className="closeButton" onClick={handleCloseDialog}>
-          X
+        <button className="subFunctionsButton" onClick={handleCloseDialog}>
+          CLOSE
         </button>
         {commandHistory.map((command, index) => (
           <div key={index} className="terminal-output">

@@ -1,12 +1,13 @@
 .taskbarMain {
     position: absolute;
     bottom: 0;
-background: rgba(255, 255, 255, 0.5);
+background: rgba(255, 255, 255, 0.8);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 1);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(15px);
+border: 2px solid rgba(255, 255, 255, 1);
+box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 1);
 min-height: 10vh;
 min-width: 5vw;
 left:50%;
@@ -31,7 +32,7 @@ border-radius: 15px;
 
 .centralRepoDialogMain {
 
-     position: absolute;
+     /* position: absolute;
     top: 0;
     left:0;
 background: rgba(255, 255, 255, 1);
@@ -39,9 +40,140 @@ border-radius: 16px;
 backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
 border: 1px solid rgb(0, 0, 0);
-min-height: 85vh;
+height: 85vh;
 min-width: 100vw;
 color:black;
 z-index: 2;
 font-size: large;
+overflow-y: scroll; */
+
+     position: absolute;
+    top: 0;
+    left:0;
+    align-items: center;
+background: rgba(0, 0, 0, 1);
+border-radius: 16px;
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgb(0, 0, 0);
+height: 86.5vh;
+width: 100vw;
+color:black;
+z-index: 2;
+font-size: large;
+overflow-y: scroll;
+overflow-x: hidden;
+color: white;
+}
+
+.iFrameDialogMain {
+      position: absolute;
+    top: -687%;
+    left: -112%;
+    bottom: 100%;
+}
+
+.addAppsButton {
+   border: none;
+  background-color: green;
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1);
+  color:white;
+  width: 150px;
+  height: 50px;
+  font-size: medium;
+  border-radius: 15px;
+}
+
+.updateAppsButton {
+   border: none;
+  background-color: lightskyblue;
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1);
+  color:black;
+  width: 150px;
+  height: 50px;
+  font-size: medium;
+  border-radius: 15px;
+}
+
+.deleteAppsButton {
+   border: none;
+  background-color: red;
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1);
+  color:white;
+  width: 150px;
+  height: 50px;
+  font-size: medium;
+  border-radius: 15px;
+}
+
+.removeAppsFromTaskBarButton{
+    position: absolute;
+    bottom: 25%;
+    left: 110%;
+     border: none;
+  background-color: red;
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1);
+  color:white;
+  width: 150px;
+  height: 50px;
+  font-size: medium;
+  border-radius: 15px;
+}
+
+.adminCentralRepoFunctions{
+  background-color: rgba(102, 165, 97, 1);
+  padding: 2%;
+  border-radius: 25px;
+  z-index: 3;
+  width: 55%;
+  margin-left: 15%;
+  margin-top: 15%;
+}
+
+.adminCentralRepoPage{
+      /* position: absolute;
+  top:7.5%;
+  left:50%; 
+  transform: translate(-50%,0%);*/
+  width: 50%;
+}
+
+
+.adminCentralRepoMapping{
+    width: 50%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.createInputIcons {
+      border: none;
+  background-color: rgba(255, 255, 255, 1);
+  font-size: medium;
+  color:black;
+  width: 75%;
+  height:50px;
+  border-radius: 15px;
+}
+
+.displayIconsToAdd {
+    margin: 1%;
+    background: rgba(102, 165, 97, 1);
+border-radius: 16px;
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgb(0, 0, 0);
+padding: 1%;
+}
+
+.checkBoxInput {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkBoxInput:checked{
+  background-color: blue;
+  border-color: black;
 }

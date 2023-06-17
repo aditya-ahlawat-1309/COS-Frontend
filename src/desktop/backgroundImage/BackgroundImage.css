@@ -1,7 +1,6 @@
 .backgroundChangerDialogMain {
-      position: absolute;
+      /* position: absolute;
     top: 15%;
-    /* left:25%; */
     align-items: center;
 background: rgba(255, 255, 255, 1);
 border-radius: 16px;
@@ -12,7 +11,24 @@ min-height: 60vh;
 min-width: 55vw;
 color:black;
 z-index: 2;
+font-size: large; */
+
+     position: absolute;
+    top: 0;
+    left:0;
+    align-items: center;
+background: rgba(0, 0, 0, 1);
+border-radius: 16px;
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgb(0, 0, 0);
+height: 86.5vh;
+width: 100vw;
+color:black;
+z-index: 2;
 font-size: large;
+overflow-y: hidden;
+overflow-x: hidden;
 }
 
 .backgroundChangerButton {

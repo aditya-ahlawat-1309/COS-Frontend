@@ -8,4 +8,85 @@
   border: none;
   background-color: transparent;
   float: left;
+  color: white;
+}
+
+.createFunctions{
+  position: absolute;
+  top:7.5%;
+  left:50%;
+  transform: translate(-50%,0%);
+  background-color: rgba(102, 165, 97, 1);
+  padding: 2%;
+  border-radius: 25px;
+  z-index: 3;
+}
+
+.createSubFunctions{
+  left:50%;
+  width:27.5%;
+  margin-left: 35%;
+  background-color: rgba(102, 165, 97, 1);
+  padding: 2%;
+  border-radius: 25px;
+  z-index: 3;
+}
+
+.createButton {
+  border: none;
+  background-color: black;
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1);
+  color:white;
+  width: 150px;
+  height: 50px;
+  font-size: medium;
+  border-radius: 15px;
+}
+
+.createInput{
+  border: none;
+  background-color: rgba(255, 255, 255, 1);
+  font-size: medium;
+  color:black;
+  width: 250px;
+  height:50px;
+  border-radius: 15px;
+  
+}
+
+.subFunctionsButton {
+  position: absolute;
+  bottom: 3%;
+  right:1%;
+  float: right;
+   border: none;
+  background-color: red;
+  box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1);
+  color:white;
+  width: 150px;
+  height: 50px;
+  font-size: medium;
+  border-radius: 15px;
+}
+
+.openButtonClick {
+   border: none;
+  background-color:transparent;
+  color:white;
+}
+
+.deleteButtonClick {
+   border: none;
+  background-color: transparent;
+  color:white;
+}
+
+.folderOpenAndDeleteButtons{
+  position:absolute;
+  top:0;
+  display: flex;
+  left:50%;
+  transform: translate(-50%,0%);
+  margin-top: 0.5%;
+  font-size: large;
 }

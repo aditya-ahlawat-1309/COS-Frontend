@@ -3,16 +3,17 @@
      position: absolute;
     top: 5%;
     left:10%;
-background: rgba(255, 255, 255, 1);
-border-radius: 16px;
+background: rgba(0, 0, 0, 1);
+border-radius: 0px;
 backdrop-filter: blur(5px);
 -webkit-backdrop-filter: blur(5px);
-border: 1px solid rgb(0, 0, 0);
-min-height: 25vh;
+border: 1px solid rgb(255, 255, 255);
+min-height: 7vh;
 min-width: 10vw;
-color:black;
+color:white;
 z-index: 2;
 font-size: large;
+box-shadow: 2px 2px 0px 0px rgba(255, 255, 255, 1);
 }
 
 .editButton {
@@ -20,4 +21,5 @@ font-size: large;
     background-color: transparent;
     font-size: large;
     margin-top: 10%;
+    color:white;
 }

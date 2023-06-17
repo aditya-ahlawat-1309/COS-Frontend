@@ -6,6 +6,10 @@ body {
   overflow: hidden; /* Hide any overflow content */
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 /* .App {
   text-align: center;
 } */

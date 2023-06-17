@@ -256,6 +256,13 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
     }
   };
 
+   const [showChildApp, setShowChildApp] = useState(false);
+
+   const handleClick = () => {
+    console.log("1");
+     setShowChildApp(!showChildApp);
+   };
+
 
 
   return (
@@ -278,7 +285,9 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
                 <img src={app} className="taskBarLogo"></img>
               </button>
               {addedIcons?.map((icon) => (
-                <div key={icon._id}>
+                <>
+                  <ParentApp icon={icon} fetchAddedIcons={fetchAddedIcons} />
+                  {/* <div key={icon._id}>
                   <a href={icon.link} target="_blank">
                     <img
                       className="taskBarLogo"
@@ -288,7 +297,8 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
                       // height="50px"
                     />
                   </a>
-                </div>
+                </div> */}
+                </>
               ))}
             </div>
           </div>
@@ -296,41 +306,88 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
 
         {dialogOpen && (
           <div className="centralRepoDialogMain">
-            {centralIcons?.map((icon) => (
-              <div key={icon._id}>
-                <img src={icon.image} alt="Icon" className="taskBarLogo" />
-                <div style={{ display: "flex" }}>
-                  <h6>{icon.iconname}</h6>
-                  <input
-                    type="checkbox"
-                    checked={selectedIcons.includes(icon._id)}
-                    onChange={() => handleIconSelect(icon)}
-                  />
+            <div style={{ display: "flex", flexWrap: "wrap" }}>
+              {centralIcons?.map((icon) => (
+                <div className="displayIconsToAdd">
+                  <div key={icon._id}>
+                    <div style={{ display: "flex" }}>
+                      <div>
+                        <img
+                          src={icon.image}
+                          alt="Icon"
+                          className="taskBarLogo"
+                        />
+                      </div>
+                      <div>
+                      <br/>
+                        <div style={{ display: "flex" }}>
+                          {/* <label>Select to Add</label> */}
+                          <span>{icon.iconname}</span>
+                          <input
+                            className="checkBoxInput"
+                            type="checkbox"
+                            checked={selectedIcons.includes(icon._id)}
+                            onChange={() => handleIconSelect(icon)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-            <button onClick={handleAddIcons}>Add Selected Icons</button>
-            <button onClick={handleCloseDialog}>Cancel</button>
+              ))}
+            </div>
+            <button className="addTextButton" onClick={handleAddIcons}>
+              Add Selected Icons
+            </button>
+            <button className="subFunctionsButton" onClick={handleCloseDialog}>
+              CLOSE
+            </button>
           </div>
         )}
 
         {isAdminDialogOpen && (
           <div className="centralRepoDialogMain">
-            <label>Name</label>
-            <input onChange={(e) => setName(e.target.value)}></input>
-            <label>Image Link</label>
-            <input onChange={(e) => setLink(e.target.value)}></input>
-            <label>Href</label>
-            <input onChange={(e) => setHref(e.target.value)}></input>
-            <button onClick={handleAddApps}>Add Apps</button>
-            <button onClick={handleAdminClick}>Cancel</button>
-            <div>
-              <h2>Central Icons</h2>
-              {icons.map((icon, index) => (
-                <>
-                <UpdateCentralIcons icon={icon} fetchCentralIconsForQueries={fetchCentralIconsForQueries} fetchCentralIcons={fetchCentralIcons}/>
+            <div style={{ display: "flex" }}>
+              <div className="adminCentralRepoPage">
+                <div className="adminCentralRepoFunctions">
+                  <br />
+                  <input
+                    className="createInputIcons"
+                    placeholder="Enter Name of the App..."
+                    onChange={(e) => setName(e.target.value)}
+                  ></input>
+                  <br />
+                  <br />
+                  <input
+                    className="createInputIcons"
+                    onChange={(e) => setLink(e.target.value)}
+                    placeholder="Enter Image Link of the App..."
+                  ></input>
+                  <br />
+                  <br />
+                  <input
+                    className="createInputIcons"
+                    onChange={(e) => setHref(e.target.value)}
+                    placeholder="Enter Href Link of the App..."
+                  ></input>
+                  <br />
+                  <br />
+                  <button onClick={handleAddApps} className="addAppsButton">
+                    Add Apps
+                  </button>
+                </div>
+              </div>
+              <div className="adminCentralRepoMapping">
+                <h2>Central Icons</h2>
+                {icons?.map((icon, index) => (
+                  <>
+                    <UpdateCentralIcons
+                      icon={icon}
+                      fetchCentralIconsForQueries={fetchCentralIconsForQueries}
+                      fetchCentralIcons={fetchCentralIcons}
+                    />
 
-                  {/* <div key={icon._id}>
+                    {/* <div key={icon._id}>
                   <h4>{icon.iconname}</h4>
                   <input
                     type="text"
@@ -361,9 +418,13 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
                     Delete
                   </button>
                 </div> */}
-                </>
-              ))}
+                  </>
+                ))}
+              </div>
             </div>
+            <button onClick={handleAdminClick} className="subFunctionsButton">
+              CLOSE
+            </button>
           </div>
         )}
       </div>
@@ -421,34 +482,137 @@ const UpdateCentralIcons = ({ icon, fetchCentralIconsForQueries, fetchCentralIco
   return (
     <div>
       <div key={icon._id}>
-        <h4>{icon.iconname}</h4>
+        <h4>App - {icon.iconname}</h4>
         <input
+          className="createInputIcons"
           type="text"
           placeholder="Updated Name"
           name="iconname"
           value={updatedIcon.iconname}
           onChange={handleInputChange}
         />
+        <br />
+        <br />
         <input
+          className="createInputIcons"
           type="text"
           placeholder="Updated Link"
           name="link"
           value={updatedIcon.link}
           onChange={handleInputChange}
         />
+        <br />
+        <br />
         <input
+          className="createInputIcons"
           type="text"
           placeholder="Updated Image"
           name="image"
           value={updatedIcon.image}
           onChange={handleInputChange}
         />
-        <button onClick={() => handleUpdateIcon(icon._id)}>Update</button>
-        <button onClick={() => handleDeleteIcon(icon._id)}>Delete</button>
+        <br />
+        <br />
+        <div style={{display:"flex"}}>
+          <button
+            className="updateAppsButton"
+            onClick={() => handleUpdateIcon(icon._id)}
+          >
+            Update
+          </button>
+        &nbsp;&nbsp;
+          <button
+            className="deleteAppsButton"
+            onClick={() => handleDeleteIcon(icon._id)}
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );
 };
+
+
+const ParentApp = ({icon, fetchAddedIcons}) => {
+  const [showChildApp, setShowChildApp] = useState(false);
+  const [removeDialog, setRemoveDialog] = useState(false);
+
+  const handleClick = () => {
+    setShowChildApp(true);
+  };
+
+  const handleMouseDown = (event) => {
+    event.preventDefault();
+
+    if (event.button === 2) {
+     setRemoveDialog(!removeDialog)
+    }
+  };
+
+   const handleDeleteIcon = async () => {
+     try {
+       const response = await axios.post(
+         `http://localhost:8000/api/delete/icon/${icon._id}`
+       );
+       console.log("Icon deleted:", response.data);
+       fetchAddedIcons()
+       // You can perform additional actions after deleting the icon
+     } catch (error) {
+       console.error("Error:", error);
+     }
+   };
+
+  const handleCloseApp = () => {
+    setShowChildApp(false);
+  };
+
+
+  return (
+    <div>
+      <button onClick={handleClick} className="logoButton">
+        <div key={icon._id}>
+          <img
+            onContextMenu={handleMouseDown}
+            className="taskBarLogo"
+            src={icon.image}
+            alt="Icon"
+          />
+        </div>
+      </button>
+
+      {showChildApp && (
+        <button
+          className="removeAppsFromTaskBarButton"
+          onClick={handleCloseApp}
+        >
+          CLOSE
+        </button>
+      )}
+      {removeDialog && (
+        <button
+          className="removeAppsFromTaskBarButton"
+          onClick={handleDeleteIcon}
+        >
+          REMOVE
+        </button>
+      )}
+
+      {showChildApp && (
+        <div className="iFrameDialogMain">
+          <iframe
+            id="refIframe"
+            title="iFrame"
+            src={icon.link} // Replace with the URL of the child application
+            height="99%"
+            width="505%"
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
 
 
 export default Taskbar;

@@ -3,42 +3,40 @@ import EditDialog from "./edit/EditDialog";
 import "./Menubar.css";
 import NewFolder from "./new/NewFolder";
 
-const Menubar = ({handleOptionChange}) => {
+const Menubar = ({ handleOptionChange }) => {
+  const [batteryLevel, setBatteryLevel] = useState(0);
+  const [chargingStatus, setChargingStatus] = useState("");
 
-    const [batteryLevel, setBatteryLevel] = useState(0);
-    const [chargingStatus, setChargingStatus] = useState("");
+  useEffect(() => {
+    navigator
+      .getBattery()
+      .then((battery) => {
+        const updateBatteryStatus = () => {
+          setBatteryLevel(battery.level * 100);
+          setChargingStatus(battery.charging ? "Charging" : "Not Charging");
+        };
 
-    useEffect(() => {
-      navigator
-        .getBattery()
-        .then((battery) => {
-          const updateBatteryStatus = () => {
-            setBatteryLevel(battery.level * 100);
-            setChargingStatus(battery.charging ? "Charging" : "Not Charging");
-          };
+        battery.addEventListener("levelchange", updateBatteryStatus);
+        battery.addEventListener("chargingchange", updateBatteryStatus);
 
-          battery.addEventListener("levelchange", updateBatteryStatus);
-          battery.addEventListener("chargingchange", updateBatteryStatus);
+        updateBatteryStatus();
+      })
+      .catch((error) => {
+        console.error("Battery API not supported:", error);
+      });
+  }, []);
 
-          updateBatteryStatus();
-        })
-        .catch((error) => {
-          console.error("Battery API not supported:", error);
-        });
-    }, []);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-    const [currentTime, setCurrentTime] = useState(new Date());
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
 
-    useEffect(() => {
-      const timer = setInterval(() => {
-        setCurrentTime(new Date());
-      }, 1000);
-
-      return () => {
-        clearInterval(timer);
-      };
-    }, []);
-
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
@@ -52,17 +50,16 @@ const Menubar = ({handleOptionChange}) => {
     setIsFileDialogOpen(!isFileDialogOpen);
   };
 
+  //    const [selectedOption, setSelectedOption] = useState("");
 
-//    const [selectedOption, setSelectedOption] = useState("");
+  //    const handleOptionChange = (option) => {
+  //      console.log(option);
+  //      setSelectedOption(option);
+  //    };
 
-//    const handleOptionChange = (option) => {
-//      console.log(option);
-//      setSelectedOption(option);
-//    };
-
-//   const handleCloseDialog = () => {
-//     setIsEditDialogOpen(false);
-//   };
+  //   const handleCloseDialog = () => {
+  //     setIsEditDialogOpen(false);
+  //   };
 
   // Rest of the component code
 
@@ -70,12 +67,12 @@ const Menubar = ({handleOptionChange}) => {
     <>
       <div className="menubarMain">
         <div className="menuBarButton">
-          <button className="logoButtonLeft">System Health</button>
+          <button className="logoButtonLeft">SYSTEM HEALTH</button>
           <button className="logoButtonLeft" onClick={handleFileClick}>
-            File
+            FILE
           </button>
           <button className="logoButtonLeft" onClick={handleEditClick}>
-            Edit
+            EDIT
           </button>
         </div>
         <div className="menuBarButtonLogos">
@@ -95,4 +92,3 @@ const Menubar = ({handleOptionChange}) => {
 };
 
 export default Menubar;
-

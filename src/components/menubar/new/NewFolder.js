@@ -10,7 +10,7 @@ const NewFolder = ({handleOptionChange}) => {
     <>
       <div className="editDialogMain">
         <button onClick={handleOpenDialog} className="editButton">
-          Add File
+          New File
         </button>
       </div>
       {isOpen && (
