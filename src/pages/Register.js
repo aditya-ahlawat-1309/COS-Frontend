@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { handleErrors } from "./Login";
+import DOMAIN from "../Domian";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -46,7 +47,7 @@ try {
       };
       const { data } = await axios
         .post(
-          `http://localhost:8000/api/register`,
+          `${DOMAIN}/api/register`,
           {
             username,
             password,

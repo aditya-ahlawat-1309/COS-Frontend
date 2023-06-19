@@ -145,6 +145,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./FolderDialog.css";
 import { ChatContext } from "../../Context/ChatProvider";
 import axios from "axios";
+import DOMAIN from "../../Domian";
 
 function FolderDialog({ handleCloseDialog, folderId, name }) {
   const { user } = useContext(ChatContext);
@@ -167,10 +168,7 @@ function FolderDialog({ handleCloseDialog, folderId, name }) {
       //           Authorization: `Bearer ${user.token}:${user.username}`,
       //       };
       // console.log(config)
-      const response = await axios.post(
-        `http://localhost:8000/api/get/files/text`,
-        config
-      );
+      const response = await axios.post(`${DOMAIN}/api/get/files/text`, config);
       setTexts(response.data);
     } catch (error) {
       console.log(error);
@@ -184,10 +182,7 @@ function FolderDialog({ handleCloseDialog, folderId, name }) {
         text: newText,
       };
 
-      const response = await axios.post(
-        `http://localhost:8000/api/post/texts`,
-        config
-      );
+      const response = await axios.post(`${DOMAIN}/api/post/texts`, config);
       setNewText("");
       setTexts([...texts, response.data]);
     } catch (error) {

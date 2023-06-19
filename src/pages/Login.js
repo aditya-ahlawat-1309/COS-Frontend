@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { CredentialsContext } from "../App";
+import DOMAIN from "../Domian";
 
 export const handleErrors = async (response) => {
   if (!response.ok) {
@@ -54,7 +55,7 @@ const login = async(e) => {
       };
 
       const { data } = await axios
-        .post(`http://localhost:8000/api/login`, { username, password }, config)
+        .post(`${DOMAIN}/api/login`, { username, password }, config)
         .catch((err) => {
           console.log(err);
           setError(err.message);

@@ -7,6 +7,7 @@ import folderLogo from "../media/folder.png"
 import notepad from "../media/notepad.png"
 // import "./Folder.css";
 import FolderDialog from "./folderDialog/FolderDialog";
+import DOMAIN from "../Domian";
 // import EditDialog from "../components/menubar/edit/EditDialog";
 // import axios from 'axios'
 // import { ChatContext } from "../Context/ChatProvider";
@@ -116,11 +117,11 @@ const DraggableBox = ({ id, name }) => {
 
 const handleDeleteIcon = async () => {
    try {
-        const response = await axios.post(
-          `http://localhost:8000/api/post/delete/${id}`
-        ).then(() => {
-          window.location.reload();
-        });
+        const response = await axios
+          .post(`${DOMAIN}/api/post/delete/${id}`)
+          .then(() => {
+            window.location.reload();
+          });
           
         // You can perform additional actions after deleting the icon
       } catch (error) {
@@ -186,7 +187,7 @@ const getFolders = async (user, setFolders) => {
     };
     console.log(config);
     const response = await axios.post(
-      "http://localhost:8000/api/get/parentFolders",
+      `${DOMAIN}/api/get/parentFolders`,
       config
     );
     setFolders(response.data);
@@ -411,10 +412,7 @@ const [isOpen, setIsOpen] = useState(false);
             parentFolderId: folder._id,
           },
         };
-        const response = await axios.post(
-          "http://localhost:8000/api/post/folders",
-          config
-        );
+        const response = await axios.post(`${DOMAIN}/api/post/folders`, config);
         console.log("Parent folder created:", response.data);
         // Reset the folder name input
         setFolderName("");
@@ -433,7 +431,7 @@ const [isOpen, setIsOpen] = useState(false);
           },
         };
         const response = await axios.post(
-          "http://localhost:8000/api/get/subFolders",
+          `${DOMAIN}/api/get/subFolders`,
           config
         );
         console.log(response.data);
@@ -452,7 +450,7 @@ const [isOpen, setIsOpen] = useState(false);
           },
         };
         const response = await axios.post(
-          "http://localhost:8000/api/get/subFolders",
+          `${DOMAIN}/api/get/subFolders`,
           config
         );
         setSubfolders(response.data.subfolders);
@@ -503,10 +501,7 @@ const [isOpen, setIsOpen] = useState(false);
             parentFolderId: folder._id,
           },
         };
-        const response = await axios.post(
-          "http://localhost:8000/api/post/files",
-          config
-        );
+        const response = await axios.post(`${DOMAIN}/api/post/files`, config);
         console.log("Parent folder created:", response.data);
         // Reset the folder name input
         setFileName("");
@@ -525,7 +520,7 @@ const [isOpen, setIsOpen] = useState(false);
           },
         };
         const response = await axios.post(
-          "http://localhost:8000/api/get/subFolders",
+          `${DOMAIN}/api/get/subFolders`,
           config
         );
         console.log(response.data);
@@ -545,7 +540,7 @@ const [isOpen, setIsOpen] = useState(false);
             },
           };
           const response = await axios.post(
-            "http://localhost:8000/api/get/subFolders",
+            `${DOMAIN}/api/get/subFolders`,
             config
           );
           console.log(response.data);
@@ -561,11 +556,11 @@ const [isOpen, setIsOpen] = useState(false);
 
     const handleDeleteIcon = async () => {
       try {
-        const response = await axios.post(
-          `http://localhost:8000/api/post/delete/${folder._id}`
-        ).then(() => {
-          window.location.reload();
-        });
+        const response = await axios
+          .post(`${DOMAIN}/api/post/delete/${folder._id}`)
+          .then(() => {
+            window.location.reload();
+          });
           
         // You can perform additional actions after deleting the icon
       } catch (error) {
@@ -670,10 +665,7 @@ const [isOpen, setIsOpen] = useState(false);
           id: user._id,
         },
       };
-      const response = await axios.post(
-        "http://localhost:8000/api/get/subFolders",
-        config
-      );
+      const response = await axios.post(`${DOMAIN}/api/get/subFolders`, config);
       console.log(response.data);
       setFiles(response.data.files);
     } catch (error) {
@@ -688,10 +680,7 @@ const [isOpen, setIsOpen] = useState(false);
           id: user._id,
         },
       };
-      const response = await axios.post(
-        "http://localhost:8000/api/get/subFolders",
-        config
-      );
+      const response = await axios.post(`${DOMAIN}/api/get/subFolders`, config);
       console.log("called");
       setFolders(response.data.subfolders);
       window.location.reload()
@@ -718,7 +707,7 @@ const CreateParentFolder = () => {
           },
         };
         const response = await axios.post(
-          "http://localhost:8000/api/get/subFolders",
+          `${DOMAIN}/api/get/subFolders`,
           config
         );
         console.log(response.data);
@@ -736,7 +725,7 @@ const CreateParentFolder = () => {
           },
         };
         const response = await axios.post(
-          "http://localhost:8000/api/get/subFolders",
+          `${DOMAIN}/api/get/subFolders`,
           config
         );
         console.log("called");

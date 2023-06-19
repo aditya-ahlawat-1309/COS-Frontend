@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react'
 import "./Terminal.css"
 import axios from 'axios';
 import { ChatContext } from "../Context/ChatProvider";
-
+import DOMAIN from '../Domian';
 
 const Terminal = ({handleCloseDialog}) => {
   const [commandHistory, setCommandHistory] = useState([]);
@@ -35,7 +35,7 @@ console.log("Start");
        };
        console.log("send");
        const response = await axios.post(
-         "http://localhost:8000/api/command",
+         `${DOMAIN}/api/command`,
          config
        );
        const newFolder = response.data;
