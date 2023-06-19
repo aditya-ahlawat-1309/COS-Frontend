@@ -99,6 +99,7 @@ import admin from "../../media/admin.png";
 import app from "../../media/app.png"
 import Terminal from "../../terminal/Terminal";
 import { getFolders } from "../../folder/Folder";
+import DOMAIN from "../../Domian";
 const Taskbar = () => {
   const [centralIcons, setCentralIcons] = useState([]);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -133,7 +134,7 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
   const fetchCentralIconsForQueries = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/central-icons"
+        `${DOMAIN}/api/central-icons`
       );
       setIcons(response.data);
     } catch (error) {
@@ -168,7 +169,7 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
      };
      try {
        const response = await axios.post(
-         "http://localhost:8000/api/isAdmin",config
+         `${DOMAIN}/api/isAdmin`,config
        );
        console.log(response.data);
        setUserDetails(response.data.isAdmin);
@@ -180,7 +181,7 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
   const fetchCentralIcons = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/central-icons"
+        `${DOMAIN}/api/central-icons`
       );
       setCentralIcons(response.data);
     } catch (error) {
@@ -195,7 +196,7 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
        },
      };
     try {
-      const response = await axios.post("http://localhost:8000/api/getIcons",config);
+      const response = await axios.post(`${DOMAIN}/api/getIcons`,config);
       setAddedIcons(response.data);
     } catch (error) {
       console.error("Error fetching added icons:", error);
@@ -227,7 +228,7 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
        },
      };
     try {
-      await axios.post("http://localhost:8000/api/icons", config);
+      await axios.post(`${DOMAIN}/api/icons`, config);
       setSelectedIcons([]);
       handleCloseDialog();
       fetchAddedIcons();
@@ -246,7 +247,7 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
       },
     };
     try {
-      axios.post("http://localhost:8000/api/create", config);
+      axios.post(`${DOMAIN}/api/create`, config);
       setTimeout(() => {
       fetchCentralIconsForQueries()
       fetchCentralIcons()
@@ -453,7 +454,7 @@ const UpdateCentralIcons = ({ icon, fetchCentralIconsForQueries, fetchCentralIco
   const handleUpdateIcon = async (id) => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/update/${id}`,
+        `${DOMAIN}/api/update/${id}`,
         updatedIcon
       );
       console.log('Icon updated:', response.data);
@@ -468,7 +469,7 @@ const UpdateCentralIcons = ({ icon, fetchCentralIconsForQueries, fetchCentralIco
   const handleDeleteIcon = async (id) => {
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/delete/${id}`
+        `${DOMAIN}/api/delete/${id}`
       );
       console.log('Icon deleted:', response.data);
       fetchCentralIconsForQueries()
@@ -553,7 +554,7 @@ const ParentApp = ({icon, fetchAddedIcons}) => {
    const handleDeleteIcon = async () => {
      try {
        const response = await axios.post(
-         `http://localhost:8000/api/delete/icon/${icon._id}`
+         `${DOMAIN}/api/delete/icon/${icon._id}`
        );
        console.log("Icon deleted:", response.data);
        fetchAddedIcons()

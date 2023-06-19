@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import { ChatContext } from "../../../Context/ChatProvider";
 import axios from 'axios'
 import "./AddFolder.css"
+import DOMAIN from '../../../Domian';
 
 import { fetchSubfiles } from '../../../folder/Folder';
 import { fetchSubfolders } from '../../../folder/Folder';
@@ -33,7 +34,7 @@ const AddFolder = () => {
        },
      };
      const response = axios.post(
-       "http://localhost:8000/api/post/folders",
+       `${DOMAIN}/api/post/folders`,
        config
      );
      console.log("Parent folder created:", response.data);
@@ -58,7 +59,7 @@ const AddFolder = () => {
        },
      };
      const response = axios.post(
-       "http://localhost:8000/api/post/files",
+       `${DOMAIN}/api/post/files`,
        config
      );
      console.log("Parent folder created:", response.data);
