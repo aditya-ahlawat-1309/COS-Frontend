@@ -18,19 +18,23 @@ border: 2px solid white;
     padding: 0.25rem;
     margin-top: -1%;
     float:left;
+    cursor: pointer;
 }
 
 .menuBarButtonLogos {
     padding: 0.25rem;
     margin-top: -1%;
     float:right;
+cursor: pointer;
 }
+
 .sidelogoButton {  
     color:white;
     background-color: transparent;
     border: none;
      text-shadow: 0px 0px 0px rgba(0, 0, 0, 1);
      font-family: 'Helvetica', Arial, sans-serif;
+     cursor: pointer;
 }
 
 .logoButtonLeft {  

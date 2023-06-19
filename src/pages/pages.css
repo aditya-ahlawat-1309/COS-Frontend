@@ -1,0 +1,22 @@
+.welcome {
+    background-color: black;
+    color: white;
+    height: 100vh;
+    text-align: center;
+}
+
+.welcome-link {
+    color: white;
+    font-size: xx-large;
+    text-decoration: none;
+    display: grid;
+}
+
+.loginButton {
+    text-decoration: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: xx-large;
+    cursor: pointer;
+}

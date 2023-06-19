@@ -69,12 +69,12 @@ const login = async(e) => {
   };
 
   return (
-    <div>
+    <div className="welcome">
       <h1 style={{ fontSize: "3rem", color: "white", padding: "3%" }}>Login</h1>
      {
-        error ? <span style={{ color: "red", fontSize:"1.75rem", fontWeight:"bold" }}>User Already Exists</span> 
+        error ? <span style={{ color: "red", fontSize:"1.75rem", fontWeight:"bold" }}>Unable to Login</span> 
       : 
-        <span style={{ color: "red", fontSize:"1.75rem", fontWeight:"bold" }}>Please Wait</span>
+        <></>
 }
       <br/>
       <br/>
@@ -87,21 +87,18 @@ const login = async(e) => {
             paddingLeft: "10%",
             paddingRight: "10%",
             fontSize: "1.5rem",
-            backgroundColor: "green",
             opacity: "1",
             color: "white",
           }}
         >
           Username
         </label>
-        <br />
-        <br />
         <input
           onChange={(e) => setUsername(e.target.value)}
           placeholder="username"
           style={{
             backgroundColor: "white",
-            width: "40%",
+            width: "25%",
             height: "50px",
             borderRadius: "25px",
             border: "none",
@@ -109,8 +106,6 @@ const login = async(e) => {
           }}
           required
         />
-        <br />
-        <br />
         <br />
         <br />
         <label
@@ -119,22 +114,19 @@ const login = async(e) => {
             paddingLeft: "10%",
             paddingRight: "10%",
             fontSize: "1.5rem",
-            backgroundColor: "green",
             opacity: "1",
             color: "white",
           }}
         >
           Password
         </label>
-        <br />
-        <br />
         <input
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           placeholder="password"
           style={{
             backgroundColor: "white",
-            width: "40%",
+            width: "25%",
             height: "50px",
             borderRadius: "25px",
             border: "none",
@@ -144,21 +136,17 @@ const login = async(e) => {
         />
         <br />
         <br />
+        <br/>
         <button
           type="submit"
-          style={{
-            fontSize: "2rem",
-            padding: "1%",
-            paddingLeft: "10%",
-            paddingRight: "10%",
-            backgroundColor: "white",
-            opacity: "1",
-            border: "none",
-                 cursor:"pointer",
-          }}
+         className="loginButton"
         >
           Login
         </button>
+
+        <br/>
+        <br/>
+        Not a Member? <a style={{textDecoration:"none",color:"yellow"}} href="/register">Register</a>
       </form>
     </div>
   );

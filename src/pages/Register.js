@@ -67,18 +67,20 @@ try {
   };
 
   return (
-    <div>
+    <div className="welcome">
       <h1 style={{ fontSize: "3rem", color: "white", padding: "3%" }}>
         Register
       </h1>
-      {
-        error ? <span style={{ color: "red", fontSize:"1.75rem", fontWeight:"bold" }}>User Already Exists</span> 
-      : 
-        <span style={{ color: "red", fontSize:"1.75rem", fontWeight:"bold" }}>Please Wait</span>
-}
-      <br/>
-      <br/>
-      <br/>
+      {error ? (
+        <span style={{ color: "red", fontSize: "1.75rem", fontWeight: "bold" }}>
+          User ALready Exists
+        </span>
+      ) : (
+        <></>
+      )}
+      <br />
+      <br />
+      <br />
       <form onSubmit={register}>
         <label
           style={{
@@ -86,21 +88,18 @@ try {
             paddingLeft: "10%",
             paddingRight: "10%",
             fontSize: "1.5rem",
-            backgroundColor: "green",
             opacity: "1",
             color: "white",
           }}
         >
           Username
         </label>
-        <br />
-        <br />
         <input
           onChange={(e) => setUsername(e.target.value)}
           placeholder="username"
           style={{
             backgroundColor: "white",
-            width: "40%",
+            width: "25%",
             height: "50px",
             borderRadius: "25px",
             border: "none",
@@ -110,30 +109,27 @@ try {
         />
         <br />
         <br />
-        <br/>
-<br/>
+        <br />
+        <br />
         <label
           style={{
             padding: "1%",
             paddingLeft: "10%",
             paddingRight: "10%",
             fontSize: "1.5rem",
-            backgroundColor: "green",
             opacity: "1",
             color: "white",
           }}
         >
           Password
         </label>
-        <br />
-        <br />
         <input
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           placeholder="password"
           style={{
             backgroundColor: "white",
-            width: "40%",
+            width: "25%",
             height: "50px",
             borderRadius: "25px",
             border: "none",
@@ -143,21 +139,15 @@ try {
         />
         <br />
         <br />
-        <button
-          type="submit"
-          style={{
-            fontSize: "2rem",
-            padding: "1%",
-            paddingLeft: "10%",
-            paddingRight: "10%",
-            backgroundColor: "white",
-            opacity: "1",
-            border: "none",
-                 cursor:"pointer",
-          }}
-        >
+        <button type="submit" className="loginButton">
           Register
         </button>
+        <br />
+        <br />
+        Already a Member?{" "}
+        <a style={{ textDecoration: "none", color: "yellow" }} href="/login">
+          Login
+        </a>
       </form>
     </div>
   );

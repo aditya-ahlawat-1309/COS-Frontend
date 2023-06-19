@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import EditDialog from "./edit/EditDialog";
 import "./Menubar.css";
 import NewFolder from "./new/NewFolder";
+import { useHistory } from "react-router-dom"; 
 
 const Menubar = ({ handleOptionChange }) => {
   const [batteryLevel, setBatteryLevel] = useState(0);
@@ -63,6 +64,15 @@ const Menubar = ({ handleOptionChange }) => {
 
   // Rest of the component code
 
+
+  const history = useHistory();
+
+  const logout = () => {
+
+    localStorage.removeItem("userInfo");
+    history.push("/");
+  }
+
   return (
     <>
       <div className="menubarMain">
@@ -79,6 +89,7 @@ const Menubar = ({ handleOptionChange }) => {
           <button className="sidelogoButton">
             {currentTime.toLocaleTimeString()}
           </button>
+          <button className="sidelogoButton" onClick={logout}>Logout</button>
         </div>
       </div>
       {isEditDialogOpen && (
