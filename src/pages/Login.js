@@ -71,15 +71,17 @@ const login = async(e) => {
   return (
     <div className="welcome">
       <h1 style={{ fontSize: "3rem", color: "white", padding: "3%" }}>Login</h1>
-     {
-        error ? <span style={{ color: "red", fontSize:"1.75rem", fontWeight:"bold" }}>Unable to Login</span> 
-      : 
+      {error ? (
+        <span style={{ color: "red", fontSize: "1.75rem", fontWeight: "bold" }}>
+          Wrong Credentials
+        </span>
+      ) : (
         <></>
-}
-      <br/>
-      <br/>
-      <br/>
-      
+      )}
+      <br />
+      <br />
+      <br />
+
       <form onSubmit={login}>
         <label
           style={{
@@ -136,17 +138,16 @@ const login = async(e) => {
         />
         <br />
         <br />
-        <br/>
-        <button
-          type="submit"
-         className="loginButton"
-        >
+        <br />
+        <button type="submit" className="loginButton">
           Login
         </button>
-
-        <br/>
-        <br/>
-        Not a Member? <a style={{textDecoration:"none",color:"yellow"}} href="/register">Register</a>
+        <br />
+        <br />
+        Not a Member?{" "}
+        <a style={{ textDecoration: "none", color: "yellow" }} href="/register">
+          Register
+        </a>
       </form>
     </div>
   );
