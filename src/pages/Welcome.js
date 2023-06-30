@@ -28,41 +28,18 @@ export default function Welcome() {
       >
         Welcome
       </h1>
-      <div>
-        <Link
-          to="/login"
-          className="welcome-link"
-          // style={{
-          //   textDecoration: "none",
-          //   color: "white",
-          //   fontSize: "2rem",
-          //   fontWeight: "500",
-          //   backgroundColor: "red",
-          //   opacity: "1",
-          //   padding: "2%",
-          //   paddingLeft: "5%",
-          //   paddingRight: "5%",
-          // }}
-        >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          textAlign: "center",
+          marginLeft: "40%",
+        }}
+      >
+        <Link to="/login" className="welcome-link">
           Login
         </Link>
-        <br />
-        <br />
-        <Link
-          to="/register"
-          className="welcome-link"
-          // style={{
-          //   textDecoration: "none",
-          //   color: "white",
-          //   fontSize: "2rem",
-          //   fontWeight: "500",
-          //   backgroundColor: "green",
-          //   opacity: "1",
-          //   padding: "2%",
-          //   paddingLeft: "5%",
-          //   paddingRight: "5%",
-          // }}
-        >
+        <Link to="/register" className="welcome-link" style={{marginLeft:"15%"}}>
           Register
         </Link>
       </div>

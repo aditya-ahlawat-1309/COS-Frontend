@@ -1,94 +1,4 @@
-// import React,{useState} from 'react'
-// import terminal from "../../media/terminal.svg"
-// import camera from "../../media/camera.png"
-// import drum from "../../media/drum.png"
-// import notes from "../../media/notes.png"
-// import twitter from "../../media/twitter.png"
-// import whatsapp from "../../media/whatsapp.png"
-// import paint from "../../media/paint.png"
-// import nasa from "../../media/nasa.png"
-// import java from "../../media/java.png"
-// import "./Taskbar.css"
-// import Terminal from '../../terminal/Terminal'
-// const Taskbar = () => {
 
-  // const [isTerminalDialogOpen, setIsTerminalDialogOpen] = useState(false);
-
-  // const handleTerminalClick = () => {
-  //   setIsTerminalDialogOpen(!isTerminalDialogOpen);
-  //   if(isTerminalDialogOpen===true)
-  //   {window.location.reload();}
-  // };
-
-//   return (
-//     <>
-//       <div className="taskbarMain">
-//         <button className="logoButton" onClick={handleTerminalClick}>
-//           <img src={terminal} className="taskBarLogo"></img>
-//         </button>
-        
-//         <a
-//           className="logoLink"
-//           href="https://dicegamedice.netlify.app"
-//           target="_blank"
-//         >
-//           <img src={drum} className="taskBarLogo"></img>
-//         </a>
-//         <a className="logoLink">
-//           <img src={camera} className="taskBarLogo"></img>
-//         </a>
-//         <a
-//           className="logoLink"
-//           href="https://todo-aditya.netlify.app"
-//           target="_blank"
-//         >
-//           <img src={notes} className="taskBarLogo"></img>
-//         </a>
-
-//         <a
-//           className="logoLink"
-//           href="https://paint0183.netlify.app/"
-//           target="_blank"
-//         >
-//           <img src={paint} className="taskBarLogo"></img>
-//         </a>
-//         <a
-//           className="logoLink"
-//           href="https://ztmnasa.netlify.app/"
-//           target="_blank"
-//         >
-//           <img src={nasa} className="taskBarLogo"></img>
-//         </a>
-//         <button
-//           className="logoButton"
-//           href="https://github.com/aditya-ahlawat-1309/Notepad"
-//           target="_blank"
-//         >
-//           <img src={java} className="taskBarLogo"></img>
-//         </button>
-//         <a
-//           className="logoLink"
-//           href="https://twitter1309.netlify.app/"
-//           target="_blank"
-//         >
-//           <img src={twitter} className="taskBarLogo"></img>
-//         </a>
-//         <a
-//           className="logoLink"
-//           href="https://chatfullstack.netlify.app"
-//           target="_blank"
-//         >
-//           <img src={whatsapp} className="taskBarLogo"></img>
-//         </a>
-//       </div>
-      // {isTerminalDialogOpen && (
-      //   <Terminal handleCloseDialog={handleTerminalClick} />
-      // )}
-//     </>
-//   );
-// }
-
-// export default Taskbar
 
 
 import React, { useState, useEffect, useContext } from "react";
@@ -286,20 +196,12 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
                 <img src={app} className="taskBarLogo"></img>
               </button>
               {addedIcons?.map((icon) => (
-                <>
-                  <ParentApp icon={icon} fetchAddedIcons={fetchAddedIcons} />
-                  {/* <div key={icon._id}>
-                  <a href={icon.link} target="_blank">
-                    <img
-                      className="taskBarLogo"
-                      src={icon.image}
-                      alt="Icon"
-                      // width="50px"
-                      // height="50px"
-                    />
-                  </a>
-                </div> */}
-                </>
+                <div>
+                  <ParentApp
+                    icon={icon}
+                    fetchAddedIcons={fetchAddedIcons}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -320,7 +222,7 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
                         />
                       </div>
                       <div>
-                      <br/>
+                        <br />
                         <div style={{ display: "flex" }}>
                           {/* <label>Select to Add</label> */}
                           <span>{icon.iconname}</span>
@@ -387,38 +289,6 @@ const [updatedIcons, setUpdatedIcons] = useState([]);
                       fetchCentralIconsForQueries={fetchCentralIconsForQueries}
                       fetchCentralIcons={fetchCentralIcons}
                     />
-
-                    {/* <div key={icon._id}>
-                  <h4>{icon.iconname}</h4>
-                  <input
-                    type="text"
-                    placeholder="Updated Name"
-                    value={updatedIcons[index]?.iconname || icon.iconname}
-                    onChange={(event) => handleChange(event, index, "iconname")}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Updated Link"
-                    value={updatedIcons[index]?.link || icon.link}
-                    onChange={(event) => handleChange(event, index, "link")}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Updated Image"
-                    value={updatedIcons[index]?.image || icon.link}
-                    onChange={(event) => handleChange(event, index, "image")}
-                  />
-                  <button
-                    onClick={() =>
-                      handleUpdateIcon(icon._id, updatedIcons[index])
-                    }
-                  >
-                    Update
-                  </button>
-                  <button onClick={() => handleDeleteIcon(icon._id)}>
-                    Delete
-                  </button>
-                </div> */}
                   </>
                 ))}
               </div>
@@ -605,8 +475,7 @@ const ParentApp = ({icon, fetchAddedIcons}) => {
             id="refIframe"
             title="iFrame"
             src={icon.link} // Replace with the URL of the child application
-            height="99%"
-            width="505%"
+            className="iframeRatios"
           />
         </div>
       )}

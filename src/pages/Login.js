@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { CredentialsContext } from "../App";
 import DOMAIN from "../Domian";
+import Spinner from "react-bootstrap/Spinner";
 
 export const handleErrors = async (response) => {
   if (!response.ok) {
@@ -16,38 +16,14 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
- // const [, setCredentials] = useContext(CredentialsContext);
-
-  // const login = (e) => {
-  //   e.preventDefault();
-  //   fetch(`http://localhost:8000/api/login`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       username,
-  //       password,
-  //     }),
-  //   })
-  //     .then(handleErrors)
-  //     .then(() => {
-  //       setCredentials({
-  //         username,
-  //         password,
-  //       });
-  //       history.push("/home");
-  //     })
-  //     .catch((error) => {
-  //       setError(error.message);
-  //     });
-  // };
-
+ const [loading, setLoading] = useState(false);
   const history = useHistory();
 
 const login = async(e) => {
   e.preventDefault();
   try{ 
+    setError(false)
+    setLoading(true)
   const config = {
         headers: {
           "Content-type": "application/json",
@@ -57,14 +33,13 @@ const login = async(e) => {
       const { data } = await axios
         .post(`${DOMAIN}/api/login`, { username, password }, config)
         .catch((err) => {
-          console.log(err);
-          setError(err.message);
-        });
+          setError(true);
+        }).finally(setLoading(false));
 
       localStorage.setItem("userInfo", JSON.stringify(data));
        history.push("/home");
     } catch (error) {
-     console.log(error); 
+     setError(true)
     }
   };
 
@@ -139,6 +114,12 @@ const login = async(e) => {
         <br />
         <br />
         <br />
+         {loading ? (
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        ) : (
+          <>
         <button type="submit" className="loginButton">
           Login
         </button>
@@ -148,6 +129,8 @@ const login = async(e) => {
         <a style={{ textDecoration: "none", color: "yellow" }} href="/register">
           Register
         </a>
+        </>
+        )}
       </form>
     </div>
   );

@@ -32,21 +32,6 @@ border-radius: 15px;
 
 .centralRepoDialogMain {
 
-     /* position: absolute;
-    top: 0;
-    left:0;
-background: rgba(255, 255, 255, 1);
-border-radius: 16px;
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgb(0, 0, 0);
-height: 85vh;
-min-width: 100vw;
-color:black;
-z-index: 2;
-font-size: large;
-overflow-y: scroll; */
-
      position: absolute;
     top: 0;
     left:0;
@@ -68,9 +53,12 @@ color: white;
 
 .iFrameDialogMain {
       position: absolute;
-    top: -687%;
-    left: -112%;
-    bottom: 100%;
+      top:-725%;
+      left:-152.5%;
+}
+
+.iframeRatios {
+height:85vh;width:100vw;
 }
 
 .addAppsButton {
